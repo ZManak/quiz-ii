@@ -1,0 +1,45 @@
+* {
+    background-color: rgb(rgb(127, 203, 236), green, blue);
+}
+
+header {
+    background-color: blue;
+    color: aliceblue;
+}
+
+input {
+    color : aliceblue;
+    background-color: rgb(100, 170, 207);
+}
+
+#preguntas {
+color: aliceblue;
+}
+
+#respuesta1 {
+    background-color: rgb(rgb(208, 105, 105), green, blue);
+}
+
+#respuesta2 {
+    background-color: rgb(rgba(214, 220, 92, 0.866), green, blue)
+}
+
+#respuesta3 {
+    background-color: rgb(rgb(151, 227, 132), green, blue) ;
+}
+
+#respuesta4 {
+    background-color: rgb(rgb(100, 170, 207), green, blue)
+}
+
+@media (min-width: 844px) {
+    .facet_sidebar {
+      display:flexbox;
+    }
+  }
+
+@media (min-width: 1024px){
+    .facet_sidebar{
+        display:flexbox;
+    }
+}
