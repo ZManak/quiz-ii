@@ -32,12 +32,30 @@ h3 {
 
 }
 
+div {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+}
+
+.pantalla_preguntas {
+    display: flex;
+    justify-content: center;
+}
 /* esto es lo importante para que desaparezcan y aparezcan */
 
-.pregunta1, .pregunta2, .pregunta3, .pregunta4 {
+
+.pregunta0, .pregunta1, .pregunta2, .pregunta3 {
     display: none;
 }
 
+.pantalla_inicial {
+    display: block;
+}
 
 .pantalla_final {
     display: none;
@@ -46,16 +64,23 @@ h3 {
 /* esto es lo importante para que desaparezcan y aparezcan */
 
 
-.btn{
+.boton{
     border: none;
-    background: #580078;
+    background: #9700ce;
     color: #fff;
     padding: 10px 20px;
     border-radius: 50px;
     cursor: pointer;
     transition: .5s;
 }
-.btn:hover{
+.boton:hover{
     transform: scale(1.1);
 }
 
+/* estilos grafica*/
+
+#grafica {
+    background-color: aliceblue;
+    border-color: rgb(83, 83, 255);
+    border-width: 1;
+}

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/styles.css" />
     <title>QUIZ II</title>
-</head>
-<body>
+    <!-- LINK CHARTLIST CDN-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <!-- LINK CHARTLIST CDN-->
+  </head>
+  <body>
     <header>
-        
-        <h1>QUIZ</h1>
-
+      <h1>QUIZ</h1>
     </header>
 
     <main>
-        <!-- <section class ="menu_navegador">
+      <!-- <section class ="menu_navegador">
 
             <div class="nav-bg">
                 <nav class="navegacion-principal contenedor">
@@ -26,102 +29,93 @@
             </div>
         </section> -->
 
-        <section class ="pantalla_inicial">
-
-            <div>
-                <h3>BIENVENIDO AL  QUIZ</h3>
-            </div>
+      <section class="pantalla_inicial">
+        <div>
+          <h3>BIENVENIDO AL QUIZ</h3>
+          
+        </div>
 
         <section>
+          <div>
+            <h3>TUS ESTADISTICAS ANTERIORES SON:</h3>
+          </div>
+          <div>
+            <!--METER AKI LA Grafica de chartlist-->
+            <!-- <div class="ct-chart ct-perfect-fourth"></div> -->
 
-            <div>
-                <h3>TUS ESTADISTICAS ANTERIORES SON: </h3>
-            </div> 
-            <div>
-
-                <!--METER AKI LA Grafica de chartlist-->
-
-            </div>
-        </section>
-
-            <div>
-                <button class="btn" id="btn1" onclick="p1()">COMENZAR A JUGAR</button>
-            </div>
-    
-        </section>
-
-        <section class="pantalla_preguntas">
-
-    
-        
-            <section>
-                <div class="pregunta1" id="pregunta1">
-    
-                    <!--aqui tiene que pintar las preguntas JAVI CON JS-->
-                    <!--borrar lo el p de debajo de esta linea, es una prueba-->
-                    <p>1- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas  asdasdasd  asdasd?</p>
-    
-                    <button class="btn" onclick="siguientePregunta(1), p2()">SIGUIENTE PREGUNTA</button>
-                
-                </div>
-            </section>
-            <section>
-                <div class="pregunta2" id="pregunta2">
-    
-                    <!--aqui tiene que pintar las preguntas JAVI CON JS-->
-                    <!--borrar lo el p de debajo de esta linea, es una prueba-->
-                    <p>2- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas  asdasdasd  asdasd?</p>
-    
-                    <button class="btn" onclick="siguientePregunta(2), p3()">SIGUIENTE PREGUNTA</button>
-                
-                </div>
-            </section>
-            <section>
-                <div class="pregunta3" id="pregunta3">
-    
-                    <!--aqui tiene que pintar las preguntas JAVI CON JS-->
-                    <!--borrar lo el p de debajo de esta linea, es una prueba-->
-                    <p>3- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas  asdasdasd  asdasd?</p>
-    
-                    <button class="btn" onclick=" siguientePregunta(3), p4()">SIGUIENTE PREGUNTA</button>
-                
-                </div>
-            </section>
-            <section>
-                <div class="pregunta4" id="pregunta4">
-    
-                    <!--aqui tiene que pintar las preguntas JAVI CON JS-->
-                    <!--borrar lo el p de debajo de esta linea, es una prueba-->
-                    <p>4- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas  asdasdasd  asdasd?</p>
-    
-                    <button class="btn" onclick="siguientePregunta(4), p4()">SIGUIENTE PREGUNTA</button>
-                
-                </div>
-            </section>
-        </section>
-
-        <section class="pantalla_final">
-            <div>
-                <h2>TUS RESULTADOS SON LOS SIGUIENTES: </h2>
-            </div>
-
-            <div id="pantalla-final">
-                <h3>CORRECTAS: <span id="numCorrectas">3</span></h3>
-                <h3>INCORRECTAS: <span id="numIncorrectas">2</span></h3>
-                <button class="btn" onclick="window.location.assign('../index.html')">VOLVER AL INICIO o a jugar</button>
-   
-            </div>
+          </div>
 
         </section>
 
+        <div>
+          <button class="boton" id="botonEmpezar">COMENZAR A JUGAR</button>
+        </div>
+      </section>
 
+      <section class="pantalla_preguntas">
+        <section>
+          <div class="pregunta0" id="pregunta0">
+            <!--aqui tiene que pintar las preguntas JAVI CON JS-->
+            <!--borrar lo el p de debajo de esta linea, es una prueba-->
+            <p>
+              1- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas asdasdasd asdasd?
+            </p>
 
+            <button class="btnPreguntas0 boton">SIGUIENTE PREGUNTA</button>
+          </div>
+        </section>
+        <section>
+          <div class="pregunta1" id="pregunta1">
+            <!--aqui tiene que pintar las preguntas JAVI CON JS-->
+            <!--borrar lo el p de debajo de esta linea, es una prueba-->
+            <p>
+              2- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas asdasdasd asdasd?
+            </p>
 
+            <button class="btnPreguntas1 boton">SIGUIENTE PREGUNTA</button>
+          </div>
+        </section>
+        <section>
+          <div class="pregunta2" id="pregunta2">
+            <!--aqui tiene que pintar las preguntas JAVI CON JS-->
+            <!--borrar lo el p de debajo de esta linea, es una prueba-->
+            <p>
+              3- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas asdasdasd asdasd?
+            </p>
 
+            <button class="btnPreguntas2 boton">SIGUIENTE PREGUNTA</button>
+          </div>
+        </section>
+        <section>
+          <div class="pregunta3" id="pregunta3">
+            <!--aqui tiene que pintar las preguntas JAVI CON JS-->
+            <!--borrar lo el p de debajo de esta linea, es una prueba-->
+            <p>
+              4- ¿dsadasdasdasdasdsdsd asdasd asdasdasdasdas asdasdasd asdasd?
+            </p>
+
+            <button class="btnPreguntas3 boton">SIGUIENTE PREGUNTA</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="pantalla_final">
+        <div>
+          <h2>TUS RESULTADOS SON LOS SIGUIENTES:</h2>
+        </div>
+
+        <div id="pantalla-final">
+          <h3>CORRECTAS: <span id="numCorrectas">3</span></h3>
+          <h3>INCORRECTAS: <span id="numIncorrectas">2</span></h3>
+          <button class="btn" onclick="window.location.assign('../index.html')">
+            VOLVER AL INICIO o a jugar
+          </button>
+        </div>
+      </section>
     </main>
 
     <footer></footer>
 
     <script src="/scripts/script.js"></script>
-</body>
+  </body>
 </html>
