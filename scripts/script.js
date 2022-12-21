@@ -56,12 +56,12 @@ botones.forEach((element) => element.addEventListener("click", rotar));
 // funcion de cambiar de pregunta. al clickar siguiente pregunta, desaparece la pregunta actual y aparece la siguiente pregunta.
 
 function rotar() {
-  if (contador === 3// cambiar a longitud del botones 10.) {
+  if (contador === 3){// cambiar a longitud del botones 10.) {
     pantallaFinal();
   } else {
     ocultarPregunta(contador);
     mostrarPregunta(++contador);
-  }
+  };
 }
 
 //boton final de las  10 preguntas para mostrar la pantalla final.
@@ -129,7 +129,7 @@ function rotar() {
 //     // }
 // }
 // };
-
+// new Chartist.Line('.ct-chart', data, options);
 // }
 // hecho por javi en clase
 // let contador = 0;
@@ -238,3 +238,4 @@ function rotar() {
 //   new Chartist.Line('.ct-chart', data, options);
 // }
 // makeSWFilmsChart();
+
