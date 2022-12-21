@@ -2,11 +2,21 @@ const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
 
 //Fetch preguntas
 async function getQuestions() {
-    let resp = await fetch("https://opentdb.com/api.php?amount=10");
+    let resp = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
     let rawData = await resp.json();
     return rawData
 }
-
+//Randomizar preguntas
+function randomizar(array) {
+    let copia = Array.from(array); // Create a copy of input array
+    return function()  {
+        if (copia.length < 1) { copia = Array.from(array); } // This line exist to create copy and make a new array from actual array whenever all possible options are selected once
+        const index = Math.floor(Math.random() * copia.length); // Select an index randomly
+        const item = copia[index]; // Get the index value
+        copia.splice(index, 1); // Remove selected element from copied array
+        return item; // Return selected element
+      };
+  }
 //Pintar preguntas
 
 function printQuestions(rawData, lienzo) {
@@ -18,29 +28,33 @@ function printQuestions(rawData, lienzo) {
     const comp = [];
     comp.push(...arrQuest.results);
     console.log(comp);
+    console.log(comp[0].incorrect_answers[2])
     for (let i = 0; i < comp.length; i++) {
         let tarjeta = document.createElement("div");
         tarjeta.setAttribute("class", "pregunta" + i);
         tarjeta.setAttribute("id", "pregunta" + i);
-
+        const answers = randomizar([comp[i].correct_answer, comp[i].incorrect_answers[0], comp[i].incorrect_answers[1], comp[i].incorrect_answers[2]])
+        //const copiaAnswers = answers;
+        console.log(answers)
+        //console.log(copiaAnswers())
         tarjeta.innerHTML =
             `<fieldset>
         <legend id=`+i+`>${comp[i].question}</legend>
         <div>
-        <input class="pregunta`+ i + `" id="a`+i+`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="a`+ i +`">${comp[i].type}</label>
+        <input class="pregunta`+ i + `" id="a`+i+`" type="radio" name=pregunta` + i + `" value=${answers}>
+        <label for="a`+ i +`">${answers()}</label>
         </div>
         <div>
         <input class="pregunta`+ i + `" id="b` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="b`+ i +`">${comp[i].type}</label>
+        <label for="b`+ i +`">${answers()}</label>
         </div>
         <div>
         <input class="pregunta`+ i + `" id="c` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="c`+ i +`">${comp[i].type}</label>
+        <label for="c`+ i +`">${answers()}</label>
         </div>
         <div>
         <input class="pregunta`+ i + `" id="d` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="d`+ i +`">${comp[i].type}</label>
+        <label for="d`+ i +`">${answers()}</label>
         </div>
         </fieldset >
         <button class="btnPreguntas`+i+` boton">SIGUIENTE PREGUNTA</button>`
@@ -50,8 +64,8 @@ function printQuestions(rawData, lienzo) {
 }
 
 getQuestions()
-    .then((rawdata) => {
-        printQuestions(rawdata, lienzo)
+    .then((rawData) => {
+        printQuestions(rawData, lienzo)
     })
     .catch(error => alert("Error en el fetch" + error));
 
