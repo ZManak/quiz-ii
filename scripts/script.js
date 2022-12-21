@@ -9,35 +9,48 @@ async function getQuestions() {
 
 function printQuestions(rawData) {
     const lienzo = document.getElementById("lienzo");
-    let tarjeta = document.createElement("div");
-    tarjeta.innerHTML = "HOLA" + 
-    ` <h1>${rawData.results[1].incorrect_answers}</h1>`
+    console.log(rawData.results[0].question)
     console.log(rawData.results)
-        /*<div>
-        <input id=${lasPreguntas[i].respuestas[0]} type="radio" name=pregunta`+[i]+` value=${lasPreguntas[i].respuestas[0]}>
+    console.log(rawData);
+    const arrQuest = (({ results }) => ({ results }))(rawData);
+    console.log(arrQuest)
+    const comp = [];
+    comp.push(...arrQuest.results);
+    console.log(comp);
+    return comp;
+
+}
+    /*for (let i = 0; i < rawData.results.lenght; i++) {
+        let tarjeta = document.createElement("div");
+
+        tarjeta.innerHTML =
+            `   <legend>${rawData.results[0].question}</legend>´
+        <div>
+        <input id=${lasPreguntas[i].respuestas[0]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[0]}>
         <label for=${lasPreguntas[i].respuestas[0]}>${lasPreguntas[i].respuestas[0]}</label>
         </div>
         <div>
-        <input id=${lasPreguntas[i].respuestas[1]} type="radio" name=pregunta`+[i]+` value=${lasPreguntas[i].respuestas[1]}>
+        <input id=${lasPreguntas[i].respuestas[1]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[1]}>
         <label for=${sPreguntas[i].respuestas[1]}>${lasPreguntas[i].respuestas[1]}</label>
         </div>
         <div>
-        <input id=${lasPreguntas[i].respuestas[2]} type="radio" name=pregunta`+[i]+` value=${lasPreguntas[i].respuestas[2]}>
+        <input id=${lasPreguntas[i].respuestas[2]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[2]}>
         <label for=${lasPreguntas[i].respuestas[2]}>${lasPreguntas[i].respuestas[2]}</label>
         </div>
         <div>
-        <input id=${lasPreguntas[i].respuestas[3]} type="radio" name=pregunta`+[i]+` value=${lasPreguntas[i].respuestas[3]}>
+        <input id=${lasPreguntas[i].respuestas[3]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[3]}>
         <label for=${lasPreguntas[i].respuestas[3]}>${lasPreguntas[i].respuestas[3]}</label>
         </div>
-        </fieldset >`*/
-    
-        
+        </fieldset >`
+
+
         lienzo.appendChild(tarjeta);
-        return tarjeta
-}
+        //return tarjeta*/
+
+
 
 getQuestions()
     .then(rawdata => {
         printQuestions(rawdata)
     })
-    .catch(error => alert("Busca otro pokemon" + error));
+    .catch(error => alert("Error en el fetch" + error));
