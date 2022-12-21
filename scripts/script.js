@@ -1,3 +1,61 @@
+const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
+
+//Fetch preguntas
+async function getQuestions() {
+    let resp = await fetch("https://opentdb.com/api.php?amount=10");
+    let rawData = await resp.json();
+    return rawData
+}
+
+//Pintar preguntas
+
+function printQuestions(rawData, lienzo) {
+    console.log(rawData.results[0].question)
+    console.log(rawData.results)
+    console.log(rawData);
+    const arrQuest = (({ results }) => ({ results }))(rawData);
+    console.log(arrQuest)
+    const comp = [];
+    comp.push(...arrQuest.results);
+    console.log(comp);
+    for (let i = 0; i < comp.length; i++) {
+        let tarjeta = document.createElement("div");
+        tarjeta.setAttribute("class", "pregunta" + i);
+        tarjeta.setAttribute("id", "pregunta" + i);
+
+        tarjeta.innerHTML =
+            `<fieldset>
+        <legend id=`+i+`>${comp[i].question}</legend>
+        <div>
+        <input class="pregunta`+ i + `" id="a`+i+`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
+        <label for="a`+ i +`">${comp[i].type}</label>
+        </div>
+        <div>
+        <input class="pregunta`+ i + `" id="b` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
+        <label for="b`+ i +`">${comp[i].type}</label>
+        </div>
+        <div>
+        <input class="pregunta`+ i + `" id="c` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
+        <label for="c`+ i +`">${comp[i].type}</label>
+        </div>
+        <div>
+        <input class="pregunta`+ i + `" id="d` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
+        <label for="d`+ i +`">${comp[i].type}</label>
+        </div>
+        </fieldset >
+        <button class="btnPreguntas`+i+` boton">SIGUIENTE PREGUNTA</button>`
+
+        lienzo.appendChild(tarjeta);
+    }
+}
+
+getQuestions()
+    .then((rawdata) => {
+        printQuestions(rawdata, lienzo)
+    })
+    .catch(error => alert("Error en el fetch" + error));
+
+
 
 //LOGICA DE HTML IMPRIMIR UNA PREGUNTA POR PAGINA
 
@@ -5,40 +63,40 @@ let contador = 0;
 
 // funcion que al apretar el boton de comenzar a jugar, se oculte la pantalla princial y salga la primera pregunta.
 function empezar() {
-  const primeraPregunta = document.querySelector(".pregunta0");
-  primeraPregunta.style.display = "block";
+    const primeraPregunta = document.querySelector(".pregunta0");
+    primeraPregunta.style.display = "block";
 
-  const pantallaInicial = document.querySelector(".pantalla_inicial");
-  pantallaInicial.style.display = "none";
+    const pantallaInicial = document.querySelector(".pantalla_inicial");
+    pantallaInicial.style.display = "none";
 }
 
 // funcion que muestra la pregunta
 function mostrarPregunta(contador) {
-  const pregunta = document.querySelector(".pregunta" + contador);
-  pregunta.style.display = "block";
-  contador++;
+    const pregunta = document.querySelector(".pregunta" + contador);
+    pregunta.style.display = "block";
+    contador++;
 }
 
 //funcion que oculta la pregunta
 function ocultarPregunta(numPregunta) {
-  const pregunta = document.getElementById("pregunta" + numPregunta);
-  pregunta.style.display = "none";
+    const pregunta = document.getElementById("pregunta" + numPregunta);
+    pregunta.style.display = "none";
 }
 
 //funcion que imprime la pantalla final
 function pantallaFinal() {
-  const ultimaPregunta = document.querySelector(".pregunta3");
-  ultimaPregunta.style.display = "none";
+    const ultimaPregunta = document.querySelector(".pregunta3");
+    ultimaPregunta.style.display = "none";
 
-  const pantallaFinal = document.querySelector(".pantalla_final");
-  pantallaFinal.style.display = "block";
+    const pantallaFinal = document.querySelector(".pantalla_final");
+    pantallaFinal.style.display = "block";
 
-  const todasLasPantallasPreguntas = document.querySelectorAll(
-    ".pantalla_preguntas"
-  );
-  todasLasPantallasPreguntas.forEach(
-    (pantalla) => (pantalla.style.display = "none")
-  );
+    const todasLasPantallasPreguntas = document.querySelectorAll(
+        ".pantalla_preguntas"
+    );
+    todasLasPantallasPreguntas.forEach(
+        (pantalla) => (pantalla.style.display = "none")
+    );
 }
 
 // añadimos evento de al clickar el boton comenzar a jugar haga la funcion empezar.
@@ -46,9 +104,9 @@ document.getElementById("botonEmpezar").addEventListener("click", empezar);
 
 // recorremos los botones de la pagina.
 const botones = [];
-for (let i = 0; i <= 10; i++) {
-  const boton = document.querySelector(".btnPreguntas" + i);
-  botones.push(boton);
+for (let i = 0; i < 10; i++) {
+    const boton = document.querySelector(".btnPreguntas" + i);
+    botones.push(boton);
 }
 
 botones.forEach((element) => element.addEventListener("click", rotar));
@@ -56,12 +114,12 @@ botones.forEach((element) => element.addEventListener("click", rotar));
 // funcion de cambiar de pregunta. al clickar siguiente pregunta, desaparece la pregunta actual y aparece la siguiente pregunta.
 
 function rotar() {
-  if (contador === 3// cambiar a longitud del botones 10.) {
-    pantallaFinal();
-  } else {
-    ocultarPregunta(contador);
-    mostrarPregunta(++contador);
-  }
+    if (contador === 3) {// cambiar a longitud del botones 10.) {
+        pantallaFinal();
+    } else {
+        ocultarPregunta(contador);
+        mostrarPregunta(++contador);
+    };
 }
 
 //boton final de las  10 preguntas para mostrar la pantalla final.
@@ -87,8 +145,8 @@ function rotar() {
 //   for (let i = 0; i < listaResultados.length; i++) {
 
 //     arrayAciertos.push(listaResultados[i])
-    
-    
+
+
 // }
 // const data = {
 //   labels: preguntas,
@@ -238,3 +296,4 @@ function rotar() {
 //   new Chartist.Line('.ct-chart', data, options);
 // }
 // makeSWFilmsChart();
+

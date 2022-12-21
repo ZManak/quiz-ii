@@ -44,6 +44,7 @@ button {
 
 .pantalla_preguntas {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 /* esto es lo importante para que desaparezcan y aparezcan */
