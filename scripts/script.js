@@ -71,11 +71,13 @@ function activarBotones() {
     document.getElementById("botonEmpezar").addEventListener("click", empezar);
 }
 
+const elegidas = []
+const correctas = []
 async function iniciarQuiz() {
     const questions = await getQuestions()
     printQuestions(questions, lienzo)
     activarBotones()
-    document.querySelector("input[type='radio']").addEventListener("click", validar)
+    document.querySelector("").addEventListener("click", validar)
     }
 
 iniciarQuiz()
@@ -83,14 +85,14 @@ iniciarQuiz()
 
 let contador = 0;
 function validar(data) {
-    let aciertos = 0
+    let aciertos = 0;
     const arrQuest2 = (({ results }) => ({ results }))(data);
     const comp2 = [];
     comp2.push(...arrQuest2.results);
-    console.log(comp2[0].correct_answer)
+    console.log(comp2.correct_answer)
     const choices = document.querySelectorAll(
         "input[type='radio']:checked");
-    console.log(choices[1])
+    console.log(choices[i].value)
     for (let i = 0; i < choices.length; i++) {
         if (choices[i].value === comp2[i].correct_answer.split(' ').join('')) {
         aciertos++
