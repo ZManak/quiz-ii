@@ -9,26 +9,20 @@ async function getQuestions() {
 //Randomizar preguntas
 function randomizar(array) {
     let copia = Array.from(array); // Create a copy of input array
-    return function()  {
+    return function () {
         if (copia.length < 1) { copia = Array.from(array); } // This line exist to create copy and make a new array from actual array whenever all possible options are selected once
         const index = Math.floor(Math.random() * copia.length); // Select an index randomly
         const item = copia[index]; // Get the index value
         copia.splice(index, 1); // Remove selected element from copied array
         return item; // Return selected element
-      };
-  }
+    };
+}
 //Pintar preguntas
 
 function printQuestions(rawData, lienzo) {
-    console.log(rawData.results[0].question)
-    console.log(rawData.results)
-    console.log(rawData);
     const arrQuest = (({ results }) => ({ results }))(rawData);
-    console.log(arrQuest)
     const comp = [];
     comp.push(...arrQuest.results);
-    console.log(comp);
-    console.log(comp[0].incorrect_answers[2])
     for (let i = 0; i < comp.length; i++) {
         let tarjeta = document.createElement("div");
         tarjeta.setAttribute("class", "pregunta" + i);
@@ -38,44 +32,52 @@ function printQuestions(rawData, lienzo) {
         let q2 = que()
         let q3 = que()
         let q4 = que()
-        console.log(q1)
-        console.log(q2)
-        console.log(q3)
-        console.log(q4)
+
         tarjeta.innerHTML =
             `<fieldset>
-        <legend id=`+i+`>${comp[i].question}</legend>
+        <legend id=${i}>${comp[i].question}</legend>
         <div>
-        <input class="pregunta" id="a`+i+`" type="radio" name=pregunta` + i + `" value=${q1.split(' ').join('')}>
-        <label for="a`+ i +`">${q1}</label>
+        <input class="pregunta" id="a${i}" type="radio" name=pregunta${i}" value=${q1.split(' ').join('')}>
+        <label for="a${i}">${q1}</label>
         </div>
         <div>
-        <input class="pregunta" id="b` + i +`" type="radio" name=pregunta` + i + `" value=${q2.split(' ').join('')}>
-        <label for="b`+ i +`">${q2}</label>
+        <input class="pregunta" id="b${i}" type="radio" name=pregunta${i}" value=${q2.split(' ').join('')}>
+        <label for="b${i}">${q2}</label>
         </div>
         <div>
-        <input class="pregunta" id="c` + i +`" type="radio" name=pregunta` + i + `" value=${q3.split(' ').join('')}>
-        <label for="c`+ i +`">${q3}</label>
+        <input class="pregunta" id="c${i}" type="radio" name=pregunta${i}" value=${q3.split(' ').join('')}>
+        <label for="c${i}">${q3}</label>
         </div>
         <div>
-        <input class="pregunta" id="d` + i +`" type="radio" name=pregunta` + i + `" value=${q4.split(' ').join('')}>
-        <label for="d`+ i +`">${q4}</label>
+        <input class="pregunta" id="d${i}" type="radio" name=pregunta${i}" value=${q4.split(' ').join('')}>
+        <label for="d${i}">${q4}</label>
         </div>
         </fieldset >
-        <button class="btnPreguntas`+i+` boton">SIGUIENTE PREGUNTA</button>`
+        <button class="btnPreguntas${i} boton">SIGUIENTE PREGUNTA</button>`
 
         lienzo.appendChild(tarjeta);
     }
+
+}
+// recorremos los botones de la pagina.
+function activarBotones() {
+    const botones = [];
+    for (let i = 0; i <= 9; i++) {
+        let boton = document.querySelector(".btnPreguntas" + i);
+        botones.push(boton);
+    }
+    botones.forEach((element) => element.addEventListener("click", rotar));
+    // añadimos evento de al clickar el boton comenzar a jugar haga la funcion empezar.
+    document.getElementById("botonEmpezar").addEventListener("click", empezar);
 }
 
-getQuestions()
-    .then((rawData) => {
-        printQuestions(rawData, lienzo)
-    })
-    .catch(error => alert("Error en el fetch" + error));
+async function iniciarQuiz() {
+    const questions = await getQuestions()
+    printQuestions(questions, lienzo)
+    activarBotones()
+    }
 
-
-
+iniciarQuiz()
 //LOGICA DE HTML IMPRIMIR UNA PREGUNTA POR PAGINA
 
 let contador = 0;
@@ -118,24 +120,15 @@ function pantallaFinal() {
     );
 }
 
-// añadimos evento de al clickar el boton comenzar a jugar haga la funcion empezar.
-document.getElementById("botonEmpezar").addEventListener("click", empezar);
 
-// recorremos los botones de la pagina.
-const botones = [];
-function activarBotones() {
-for (let i = 0; i <= 9 ; i++) {
-    let boton = document.querySelector("#pregunta" + i + "> button");
-    botones.push(boton);
-}
-}
-activarBotones()
-botones.forEach((element) => element.addEventListener("click", rotar));
+
+
+
 
 // funcion de cambiar de pregunta. al clickar siguiente pregunta, desaparece la pregunta actual y aparece la siguiente pregunta.
 
 function rotar() {
-    if (contador === 10) {// cambiar a longitud del botones 10.) {
+    if (contador === 9) {// cambiar a longitud del botones 10.) {
         pantallaFinal();
     } else {
         ocultarPregunta(contador);
@@ -144,179 +137,61 @@ function rotar() {
 }
 
 
-//Validación de formulario
-let aciertos = 0;
+// //Validación de formulario
+// function validar() {
 
+//     let aciertos = 0;
 
+//     let checkTodas = document.querySelectorAll("input:checked")
 
-
-
-
-
-// //LOGICA DE HTML IMPRIMIR UNA PREGUNTA POR PAGINA ARRIBA.
-
-
-// const arrayAciertos =[];
-
-
-// async function grafica (){
-
-//   const resultado = await fetch (grafica fire base);
-//   const baseDatos = await resultado.json();
-//   let listaResultados = baseDatos.results;
-
-//   for (let i = 0; i < listaResultados.length; i++) {
-
-//     arrayAciertos.push(listaResultados[i])
-
-
-// }
-const data = {
-  labels: preguntas,
-  series:[arrayAciertos],
-}
-
-
-const options = {
-width: '40%',
-height: '30%',
-// Don't draw the line chart points
-showPoint: true,
-// Disable line smoothing
-lineSmooth: false,
-// X-Axis specific configuration
-axisX: {
-    // We can disable the grid for this axis
-    showGrid: true,
-    // and also don't show the label
-    showLabel: true,
-},
-// Y-Axis specific configuration
-axisY: {
-    // Lets offset the chart a bit from the labels
-    // stepSize: 1,//opciones para definir Y
-    low: 1977,
-    high: 2005,
-    scaleMinSpace: 10,
-    divisor: preguntas.length,
-    onlyInteger: true,
-    ticks: arrayAciertos,
-    stepSize: 3,
-    // The label interpolation function enables you to modify the values
-    // used for the labels on each axis. Here we are converting the
-    // values into million pound.
-    // labelInterpolationFnc: function (value) {
-    //     return (value);
-    // }
-}
-};
-
-// }
-// hecho por javi en clase
-// let contador = 0;
-
-// // // }
-
-// function empezar() {
-
-//   const pregunta1 = document.querySelector(".pregunta0");
-//   pregunta1.style.display = "block";
-
-//   const pantallaInicial = document.querySelector(".pantalla_inicial");
-//   pantallaInicial.style.display = "none";
-// };
-
-// function mostrarPregunta(contador) {
-
-//   const pregunta = document.querySelector(".pregunta" + contador);
-//   //pregunta.forEach(pregunta => {
-//     pregunta.style.display = "block";
-//   };
-
-// function ocultarPregunta(numPregunta) {
-//   document.getElementById("pregunta" + numPregunta).style.display = "none";
-// }
-
-// // Esta tiene que ser la ultima funcion para que imprima la pagina de resultado final
-// function pantallaFinal() {
-//   const pregunta3 = document.querySelector(".pregunta3");
-//     pregunta3.style.display = "none";
-//   };
-
-//   const pantallaPreguntas = document.querySelectorAll(".pantalla_preguntas");
-//   pantallaPreguntas.forEach(pantallaPreguntas => {
-//     pantallaPreguntas.style.display = "none";
-//   });
-
-//   const ultimaPantalla = document.querySelector(".pantalla_final");
-//   //ultimaPantalla.forEach(pantallaFinal =>
-//   ultimaPantalla.style.display = "block";
-
-// document.getElementById("botonEmpezar").addEventListener("click", empezar)
-
-// let botones = []
-// for (i = 0; i <= 10; i++) {
-//   let boton = document.querySelector(".btnPreguntas" + i)
-//   botones.push(boton)
-// }
-
-// document.querySelector(".btnPreguntas" + contador).addEventListener("click", rotar(contador))
-
-// function rotar(contador) {
-//       if (contador = botones.length) {
-//       pantallaFinal()
+//     if (checkTodas.length !== 10) {
+//         alert("Responde a todas las preguntas");
 //     } else {
-//       ocultarPregunta(contador);
-//       mostrarPregunta(contador++)
+
+//         for (let i = 0; i < lasPreguntas.length; i++) {
+//             let userAnswer = document.querySelector("input[name=pregunta" + i + "]:checked").value;
+
+//             if (userAnswer === lasPreguntas[i].correcta) {
+//                 let label = document.getElementById("" + i)
+//                 label.style.backgroundColor = "green";
+//             } else {
+//                 let label = document.getElementById("" + i)
+//                 label.style.backgroundColor = "red";
+//             }
+
+//         }
 //     }
-//   contador++
-//   return contador
-//   }
-
-// hecho por javi en clase  lo de arriba.
-
-
-
-
-
-
-
-
-// // JS DE GRAFICAS
-
-// async function makeSWFilmsChart() {
-//   let resultado = await fetch("");
-//   let dataBase = await resultado.json();
-//   const filmList = dataBase.results;
-//   const arrCorrectas = filmList.map(element => element.  );
-//   const arrIncorrectas = filmList.map(element => element)
-
-//   var data = {
-//     labels: arrCorrectas,
-//     series: [arrIncorrectas]
-//   };
-//   var options = {
-
-//     width: 1000,
-//     height: 500,
-//     onlyInteger: true,
-//     showPoint: true,
-//     showArea: true,
-//     lineSmooth: true,
-//     axisX: {
-//       offset:80
-//     },
-//     axisY: {
-//       scaleMinSpace: 1,
-//       onlyInteger: true,
-//       offset: 80,
-//       labelInterpolationFnc: function (value) {
-//         return '' + value + '';
-//       }
-//     }
-
-//   };
-//   new Chartist.Line('.ct-chart', data, options);
 // }
-// makeSWFilmsChart();
 
+
+var data = {
+    // A labels array that can contain any sort of values
+    labels: ['fechas', 'fechas', 'fechas', 'fechas', 'fechas'],
+    // Our series array that contains series objects or in this case series data arrays
+    series: [
+      [10, 2, 4, 4, 0]
+    ]
+  };
+  var options = {
+    width: 600,
+    height: 500,
+    onlyInteger: true,
+    showPoint: true,
+    showArea: true,
+    lineSmooth: true,
+    axisX: {
+      offset:200
+    },
+    axisY: {
+      onlyInteger: true,
+      offset: 80,
+      labelInterpolationFnc: function (value) {
+        return '' + value + '';
+      }
+    }
+  };
+  
+  // Create a new line chart object where as first parameter we pass in a selector
+  // that is resolving to our chart container element. The Second parameter
+  // is the actual data object.
+  new Chartist.Bar('.ct-chart', data, options);

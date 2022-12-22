@@ -18,16 +18,7 @@
     </header>
 
     <main>
-      <!-- <section class ="menu_navegador">
-
-            <div class="nav-bg">
-                <nav class="navegacion-principal contenedor">
-                    <a href="index.html">Home</a>
-                    <a href="/pages/quiz.html">Preguntas</a>
-                    <a href="/pages/resultados.html">Resultados</a>
-                </nav>
-            </div>
-        </section> -->
+    
 
       <section class="pantalla_inicial">
         <div>
@@ -37,8 +28,10 @@
 
         <section>
           <div>
-            <h3>TUS ESTADISTICAS ANTERIORES SON:</h3>
+            <h3>TUS ANTERIORES RESULTADOS HAN SIDO:</h3>
           </div>
+          <div class="ct-chart ct-perfect-fourth"></div>
+
           <div>
             <!--METER AKI LA Grafica de chartlist-->
             <!-- <div class="ct-chart ct-perfect-fourth"></div> -->
@@ -56,13 +49,13 @@
 
       <section class="pantalla_final">
         <div>
-          <h2>TUS RESULTADOS SON LOS SIGUIENTES:</h2>
+          <h3>TUS RESULTADOS SON LOS SIGUIENTES:</h3>
         </div>
 
-        <div id="pantalla-final">
+        <div id="pantalla_final">
           <h3>CORRECTAS: <span id="numCorrectas">3</span></h3>
           <h3>INCORRECTAS: <span id="numIncorrectas">2</span></h3>
-          <button class="btn" onclick="window.location.assign('../index.html')">
+          <button class="btn" id="btnFinal" onclick="window.location.assign('../index.html')">
             VOLVER AL INICIO o a jugar
           </button>
         </div>
