@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/normalize.css" />
     <link rel="stylesheet" href="/styles/styles.css" />
     <title>QUIZ II</title>
     <!-- LINK CHARTLIST CDN-->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"
+    />
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <!-- LINK CHARTLIST CDN-->
   </head>
@@ -18,44 +21,39 @@
     </header>
 
     <main>
-    
-
       <section class="pantalla_inicial">
         <div>
           <h3>BIENVENIDO AL QUIZ</h3>
-
         </div>
-
-        <section>
-          <div>
-            <h3>TUS ANTERIORES RESULTADOS HAN SIDO:</h3>
-          </div>
-          <div class="ct-chart ct-perfect-fourth"></div>
-
-          <div>
-            <!--METER AKI LA Grafica de chartlist-->
-            <!-- <div class="ct-chart ct-perfect-fourth"></div> -->
-
-          </div>
-
-        </section>
-
+        <div>
+          <h3>Tus anteriores resultados :</h3>
+        </div>
         <div>
           <button class="boton" id="botonEmpezar">COMENZAR A JUGAR</button>
         </div>
+        <br />
+        <section class="chart-container">
+          <div class="ct-chart ct-perfect-fourth"></div>
+        </section>
       </section>
 
       <section class="pantalla_preguntas"></section>
 
       <section class="pantalla_final">
         <div>
-          <h3>TUS RESULTADOS SON LOS SIGUIENTES:</h3>
+          <h3>HAS ACERTADO :</h3>
         </div>
 
         <div id="pantalla_final">
-          <h3>CORRECTAS: <span id="numCorrectas">3</span></h3>
-          <h3>INCORRECTAS: <span id="numIncorrectas">2</span></h3>
-          <button class="btn" id="btnFinal" onclick="window.location.assign('../index.html')">
+          <h3>3/10<span id="numCorrectas"></span></h3>
+        </div>
+
+        <div>
+          <button
+            class="btn"
+            id="btnFinal"
+            onclick="window.location.assign('../index.html')"
+          >
             VOLVER AL INICIO o a jugar
           </button>
         </div>

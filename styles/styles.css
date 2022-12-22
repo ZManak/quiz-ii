@@ -1,65 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
 *{
     box-sizing: border-box;
     font-family: 'Mochiy Pop One';
 }
 
+/*TITULO QUIZ*/
 h1{
     width: fit-content;
-    background-color: #fff;
+    background-color: rgb(162, 210, 255);
     margin: 40px auto;
     border-radius: 60px;
     box-shadow: 5px 5px 0 coral;
-    padding: 20px 30px;
+    padding: 15px 20px;
 }
 
+/* TITULOS VARIOS */
 h3 {
-
     width: fit-content;
     background-color: #fff;
-    margin: 40px auto;
     border-radius: 60px;
     box-shadow: 5px 5px 0 rebeccapurple;
-    padding: 20px 30px;
+    padding: 15px 20px;
+}
+
+/*enunciado de cada pregunta*/
+legend {
+    font-size: 20px;
+    color: rgb(34, 54, 57);
+    text-align: center;
+    padding: 10px;
+}
+
+/*cada respuesta esta en un label*/
+label {
+    margin: 10px;
+    padding: 10px;
 
 }
+
+body {
+    background-color: rgb(53, 255, 161);
+}
+
+.btnPreguntas0boton {
+    display: flex;
+    justify-content: center;
+    
+}
+
+/* ID,S DE LAS RESPUESTAS DE CADA PREGUNTA.*/
+#r00, #r10, #r20, #r30, #r40, #r50, #r60, #r70, #r80, #r90{
+    color:black;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: rgb(205, 180, 219);
+}
+
+#r01, #r11, #r21, #r31, #r41, #r51, #r61, #r71, #r81, #r91  {
+    color: black;
+    background-color: rgb(255, 200, 221);
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+#r02, #r12, #r22, #r32, #r42, #r52, #r62, #r72, #r82, #r92  {
+    color: black;
+    background-color: rgb(255, 175, 204);
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+#r03, #r13, #r23, #r33, #r43, #r53 , #r63, #r73 , #r83, #r93 {
+    color:black;
+    background-color:rgb(189, 224, 254);
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
 
 div {
     display: flex;
     justify-content: center;
-}
-
-button {
-    display: flex;
-    justify-content: center;
-}
-
-
-.pantalla_preguntas {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-/* esto es lo importante para que desaparezcan y aparezcan */
-#pantalla-inicial{
-    display: block;
-    text-align: center;
-    font-size: 30px;
-}
-#pantalla-inicial{
-    margin: 60px 0;
-}
-.btn{
-    border: none;
-    background: #580078;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: .5s;
-}
-.btn:hover{
-    transform: scale(1.1);
 }
 
 
@@ -75,114 +97,49 @@ button {
     display: none;
 }
 
-esto es lo importante para que desaparezcan y aparezcan
-
-
 .boton, .btn{
     border: none;
-    background: #9700ce;
+    background: rgb(162, 210, 255);
     color: #fff;
     padding: 10px 20px;
     border-radius: 50px;
     cursor: pointer;
     transition: .5s;
+    font-size: 15px;
 }
+
 .boton:hover, .btn{
     transform: scale(1.1);
 }
 
-#btnFinal {
-    width: 300px;
-    height: 50px;
-}
+.chart-container {
+    padding: 100px;
+    width: 100%; /* Establece el ancho del contenedor en el 80% del ancho del padre */
+    margin: 0 auto; /* Centra el contenedor en el padre */
+  }
 
-/* estilos grafica*/
 
-/* 
-#pantalla-juego{
+
+/*MEDIA QUERYS DARLE UNA VUELTA QUE MODIFICAR EN CASO DE CAMBIAR EL DISPOSITIVO*/
+
+@media (max-width: 654px) {
+    .chart-container {
     display: none;
-}
-.pantalla-juego{
-    max-width: 800px;
-    margin: 50px auto;
-    text-align: center;
-}
-.pantalla-juego img{
-    max-width: 400px;
-    width: 100%;
-}
-.opciones{
-    max-width: 400px;
-    margin: auto;
-}
-.opcion{
-    display: flex;
-    position: relative;
-    align-items: center;
-    max-width: 400px;
-    margin: 30px auto;
-    cursor: pointer;
-}
-.opcion .letra{
-    background-color: #580078;
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    border-radius: 50%;
-    line-height: 35px;
-    border: 5px solid #fff;
-    position: relative;
-}
-.opcion .nombre{
-    background: #fff;
-    width: 100%;
-    font-size: 25px;
-    position: absolute;
-    margin-left: 30px;
-    z-index: -2;
-    border-radius: 0 20px 20px 0;
-    padding: 7px 0 7px 30px;
-}
-clases que se aplicará cuando haya acertada la opcion  */
-.opcion .nombreAcertada{
-    background-color: yellowgreen;
-    color: #fff;
-}
-.opcion .letraAcertada{
-    background-color: yellowgreen;
-    color: #fff ;
-}
-/* clases que se aplicaran cuando se equivoque en la opcion elegida */
-.opcion .nombreNoAcertada{
-    background-color: darkred;
-    color: #fff;
-}
-.opcion .letraNoAcertada{
-    background-color: darkred;
-    color: #fff;
+  }
 }
 
-/* PANTALLA final */
-#pantalla-final{
-    display: none;
-    text-align: center;
+@media (min-width: 768px) and (max-width: 991px) {
+  .ct-chart {
+    width: 50%; /* Establece el ancho de la gráfica en el 50% del ancho del contenedor en tablets */
+    height: 75vh; /* Establece la altura de la gráfica en el 75% del alto de la pantalla en tablets */
+  }
 }
-#pantalla-final #numCorrectas{
-    background-color: chartreuse;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 5px solid #fff;
+
+@media (min-width: 992px) {
+  .ct-chart {
+    width: 25%; /* Establece el ancho de la gráfica en el 25% del ancho del contenedor en ordenadores */
+    height: 100vh; /* Establece la altura de la gráfica en el 100% del alto de la pantalla en ordenadores */
+  }
 }
-#pantalla-final #numIncorrectas{
-    background-color: darkred;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-}
+
+

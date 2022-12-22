@@ -38,19 +38,19 @@ function printQuestions(rawData, lienzo) {
         <legend id=${i}>${comp[i].question}</legend>
         <div>
         <input class="pregunta" id="a${i}" type="radio" name=pregunta${i}" value=${q1.split(' ').join('')}>
-        <label for="a${i}">${q1}</label>
+        <label id=r${i}0 for="a${i}">${q1}</label>
         </div>
         <div>
         <input class="pregunta" id="b${i}" type="radio" name=pregunta${i}" value=${q2.split(' ').join('')}>
-        <label for="b${i}">${q2}</label>
+        <label id=r${i}1 for="b${i}">${q2}</label>
         </div>
         <div>
         <input class="pregunta" id="c${i}" type="radio" name=pregunta${i}" value=${q3.split(' ').join('')}>
-        <label for="c${i}">${q3}</label>
+        <label id=r${i}2 for="c${i}">${q3}</label>
         </div>
         <div>
         <input class="pregunta" id="d${i}" type="radio" name=pregunta${i}" value=${q4.split(' ').join('')}>
-        <label for="d${i}">${q4}</label>
+        <label id=r${i}3 for="d${i}">${q4}</label>
         </div>
         </fieldset >
         <button class="btnPreguntas${i} boton">SIGUIENTE PREGUNTA</button>`
@@ -169,16 +169,12 @@ var data = {
     labels: ['fechas', 'fechas', 'fechas', 'fechas', 'fechas'],
     // Our series array that contains series objects or in this case series data arrays
     series: [
-      [10, 2, 4, 4, 0]
+      [10, 2, 4, 4, ]
     ]
   };
   var options = {
-    width: 600,
-    height: 500,
     onlyInteger: true,
-    showPoint: true,
-    showArea: true,
-    lineSmooth: true,
+    low:0,
     axisX: {
       offset:200
     },
@@ -195,3 +191,4 @@ var data = {
   // that is resolving to our chart container element. The Second parameter
   // is the actual data object.
   new Chartist.Bar('.ct-chart', data, options);
+
