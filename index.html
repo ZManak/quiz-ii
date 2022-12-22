@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/normalize.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <title>QUIZ II</title>
+    <!-- LINK CHARTLIST CDN-->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"
+    />
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <!-- LINK CHARTLIST CDN-->
+  </head>
+  <body>
+    <header>
+      <h1>QUIZ</h1>
+    </header>
+
+    <main>
+      <section class="pantalla_inicial">
+        <div>
+          <h3>BIENVENIDO AL QUIZ</h3>
+        </div>
+        <div>
+          <h3>Tus anteriores resultados :</h3>
+        </div>
+        <div>
+          <button class="boton" id="botonEmpezar">COMENZAR A JUGAR</button>
+        </div>
+        <br />
+        <section class="chart-container">
+          <div class="ct-chart ct-perfect-fourth"></div>
+        </section>
+      </section>
+
+      <section class="pantalla_preguntas"></section>
+
+      <section class="pantalla_final">
+        <div>
+          <h3>HAS ACERTADO :</h3>
+        </div>
+
+        <div id="pantalla_final">
+          <h3><span id="numCorrectas"></span></h3>
+        </div>
+
+        <div>
+          <button
+            class="btn"
+            id="btnFinal"
+            onclick="window.location.assign('../index.html')"
+          >
+            VOLVER AL INICIO o a jugar
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer></footer>
+
+    <script src="/scripts/script.js"></script>
+  </body>
+</html>
