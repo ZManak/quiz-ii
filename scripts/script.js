@@ -148,45 +148,45 @@ function rotar() {
 
 
 // }
-// const data = {
-//   labels: preguntas,
-//   series:[arrayAciertos],
-// }
+const data = {
+  labels: preguntas,
+  series:[arrayAciertos],
+}
 
 
-// const options = {
-// width: '40%',
-// height: '30%',
-// // Don't draw the line chart points
-// showPoint: true,
-// // Disable line smoothing
-// lineSmooth: false,
-// // X-Axis specific configuration
-// axisX: {
-//     // We can disable the grid for this axis
-//     showGrid: true,
-//     // and also don't show the label
-//     showLabel: true,
-// },
-// // Y-Axis specific configuration
-// axisY: {
-//     // Lets offset the chart a bit from the labels
-//     // stepSize: 1,//opciones para definir Y
-//     low: 1977,
-//     high: 2005,
-//     scaleMinSpace: 10,
-//     divisor: preguntas.length,
-//     onlyInteger: true,
-//     ticks: arrayAciertos,
-//     stepSize: 3,
-//     // The label interpolation function enables you to modify the values
-//     // used for the labels on each axis. Here we are converting the
-//     // values into million pound.
-//     // labelInterpolationFnc: function (value) {
-//     //     return (value);
-//     // }
-// }
-// };
+const options = {
+width: '40%',
+height: '30%',
+// Don't draw the line chart points
+showPoint: true,
+// Disable line smoothing
+lineSmooth: false,
+// X-Axis specific configuration
+axisX: {
+    // We can disable the grid for this axis
+    showGrid: true,
+    // and also don't show the label
+    showLabel: true,
+},
+// Y-Axis specific configuration
+axisY: {
+    // Lets offset the chart a bit from the labels
+    // stepSize: 1,//opciones para definir Y
+    low: 1977,
+    high: 2005,
+    scaleMinSpace: 10,
+    divisor: preguntas.length,
+    onlyInteger: true,
+    ticks: arrayAciertos,
+    stepSize: 3,
+    // The label interpolation function enables you to modify the values
+    // used for the labels on each axis. Here we are converting the
+    // values into million pound.
+    // labelInterpolationFnc: function (value) {
+    //     return (value);
+    // }
+}
+};
 
 // }
 // hecho por javi en clase
