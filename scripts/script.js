@@ -33,28 +33,33 @@ function printQuestions(rawData, lienzo) {
         let tarjeta = document.createElement("div");
         tarjeta.setAttribute("class", "pregunta" + i);
         tarjeta.setAttribute("id", "pregunta" + i);
-        const answers = randomizar([comp[i].correct_answer, comp[i].incorrect_answers[0], comp[i].incorrect_answers[1], comp[i].incorrect_answers[2]])
-        //const copiaAnswers = answers;
-        console.log(answers)
-        //console.log(copiaAnswers())
+        const que = randomizar([comp[i].correct_answer, comp[i].incorrect_answers[0], comp[i].incorrect_answers[1], comp[i].incorrect_answers[2]])
+        let q1 = que()
+        let q2 = que()
+        let q3 = que()
+        let q4 = que()
+        console.log(q1)
+        console.log(q2)
+        console.log(q3)
+        console.log(q4)
         tarjeta.innerHTML =
             `<fieldset>
         <legend id=`+i+`>${comp[i].question}</legend>
         <div>
-        <input class="pregunta`+ i + `" id="a`+i+`" type="radio" name=pregunta` + i + `" value=${answers}>
-        <label for="a`+ i +`">${answers()}</label>
+        <input class="pregunta" id="a`+i+`" type="radio" name=pregunta` + i + `" value=${q1.split(' ').join('')}>
+        <label for="a`+ i +`">${q1}</label>
         </div>
         <div>
-        <input class="pregunta`+ i + `" id="b` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="b`+ i +`">${answers()}</label>
+        <input class="pregunta" id="b` + i +`" type="radio" name=pregunta` + i + `" value=${q2.split(' ').join('')}>
+        <label for="b`+ i +`">${q2}</label>
         </div>
         <div>
-        <input class="pregunta`+ i + `" id="c` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="c`+ i +`">${answers()}</label>
+        <input class="pregunta" id="c` + i +`" type="radio" name=pregunta` + i + `" value=${q3.split(' ').join('')}>
+        <label for="c`+ i +`">${q3}</label>
         </div>
         <div>
-        <input class="pregunta`+ i + `" id="d` + i +`" type="radio" name=pregunta` + i + `" value=${comp[i].type}>
-        <label for="d`+ i +`">${answers()}</label>
+        <input class="pregunta" id="d` + i +`" type="radio" name=pregunta` + i + `" value=${q4.split(' ').join('')}>
+        <label for="d`+ i +`">${q4}</label>
         </div>
         </fieldset >
         <button class="btnPreguntas`+i+` boton">SIGUIENTE PREGUNTA</button>`
@@ -99,7 +104,7 @@ function ocultarPregunta(numPregunta) {
 
 //funcion que imprime la pantalla final
 function pantallaFinal() {
-    const ultimaPregunta = document.querySelector(".pregunta3");
+    const ultimaPregunta = document.querySelector(".pregunta9");
     ultimaPregunta.style.display = "none";
 
     const pantallaFinal = document.querySelector(".pantalla_final");
@@ -118,22 +123,28 @@ document.getElementById("botonEmpezar").addEventListener("click", empezar);
 
 // recorremos los botones de la pagina.
 const botones = [];
-for (let i = 0; i < 10; i++) {
-    const boton = document.querySelector(".btnPreguntas" + i);
+function activarBotones() {
+for (let i = 0; i <= 9 ; i++) {
+    let boton = document.querySelector("#pregunta" + i + "> button");
     botones.push(boton);
 }
-
+}
+activarBotones()
 botones.forEach((element) => element.addEventListener("click", rotar));
 
 // funcion de cambiar de pregunta. al clickar siguiente pregunta, desaparece la pregunta actual y aparece la siguiente pregunta.
 
 function rotar() {
-    if (contador === 3) {// cambiar a longitud del botones 10.) {
+    if (contador === 10) {// cambiar a longitud del botones 10.) {
         pantallaFinal();
     } else {
         ocultarPregunta(contador);
         mostrarPregunta(++contador);
     };
 }
+
+
+//Validación de formulario
+let aciertos = 0;
 
 
