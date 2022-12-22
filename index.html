@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/styles.css" />
     <title>QUIZ II</title>
-</head>
-<body>
+    <!-- LINK CHARTLIST CDN-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <!-- LINK CHARTLIST CDN-->
+  </head>
+  <body>
     <header>
-        
-        <h1>PAGINA DE BIENVENIDA</h1>
-
+      <h1>QUIZ</h1>
     </header>
 
     <main>
-        <section>
-
-            <div class="nav-bg">
-                <nav class="navegacion-principal contenedor">
-                    <a href="index.html">Home</a>
-                    <a href="/pages/quiz.html">Preguntas</a>
-                    <a href="/pages/resultados.html">Resultados</a>
-                </nav>
-            </div>
-
-            <div id="pantalla-inicial">
-                <p>¿A qué pais pertenece la bandera?</p>
-                <button class="btn" onclick="comenzarJuego()">COMENZAR A JUGAR</button>
-            </div>
-
-
-        </section>
-
-        <section>
-
-            <div>
-                <h2>WELCOME TO THE QUIZ</h2>
-            </div>
     
-            <div>
-                <h2>YOUR STATS</h2>
-            </div>
+
+      <section class="pantalla_inicial">
+        <div>
+          <h3>BIENVENIDO AL QUIZ</h3>
+
+        </div>
+
+        <section>
+          <div>
+            <h3>TUS ANTERIORES RESULTADOS HAN SIDO:</h3>
+          </div>
+          <div class="ct-chart ct-perfect-fourth"></div>
+
+          <div>
+            <!--METER AKI LA Grafica de chartlist-->
+            <!-- <div class="ct-chart ct-perfect-fourth"></div> -->
+
+          </div>
 
         </section>
 
-        <!--Grafica de chartlist-->
+        <div>
+          <button class="boton" id="botonEmpezar">COMENZAR A JUGAR</button>
+        </div>
+      </section>
+
+      <section class="pantalla_preguntas"></section>
+
+      <section class="pantalla_final">
+        <div>
+          <h3>TUS RESULTADOS SON LOS SIGUIENTES:</h3>
+        </div>
+
+        <div id="pantalla_final">
+          <h3>CORRECTAS: <span id="numCorrectas">3</span></h3>
+          <h3>INCORRECTAS: <span id="numIncorrectas">2</span></h3>
+          <button class="btn" id="btnFinal" onclick="window.location.assign('../index.html')">
+            VOLVER AL INICIO o a jugar
+          </button>
+        </div>
+      </section>
     </main>
 
     <footer></footer>
 
     <script src="/scripts/script.js"></script>
-</body>
+  </body>
 </html>
