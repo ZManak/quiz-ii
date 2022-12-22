@@ -1,5 +1,5 @@
 const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
-
+let aciertos = 0
 //Fetch preguntas
 async function getQuestions() {
     let resp = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
@@ -75,12 +75,46 @@ async function iniciarQuiz() {
     const questions = await getQuestions()
     printQuestions(questions, lienzo)
     activarBotones()
+    document.querySelector("input[type='radio']").addEventListener("click", validar)
     }
 
 iniciarQuiz()
 //LOGICA DE HTML IMPRIMIR UNA PREGUNTA POR PAGINA
 
 let contador = 0;
+function validar(data) {
+    let aciertos = 0
+    const arrQuest2 = (({ results }) => ({ results }))(data);
+    const comp2 = [];
+    comp2.push(...arrQuest2.results);
+    console.log(comp2[0].correct_answer)
+    const choices = document.querySelectorAll(
+        "input[type='radio']:checked");
+    console.log(choices[1])
+    for (let i = 0; i < choices.length; i++) {
+        if (choices[i].value === comp2[i].correct_answer.split(' ').join('')) {
+        aciertos++
+        }
+    }
+    return aciertos
+}
+// const arrayPelis = [];
+// const arrayFechas =[];
+// async function starWars() {
+
+//     const resultado = await fetch(`https://swapi.dev/api/films/`);
+//     const baseDatos = await resultado.json();
+//     let listaPeliculas = baseDatos.results;
+
+//     for (let i = 0; i < listaPeliculas.length; i++) {
+
+//         arrayPelis.push(listaPeliculas[i].title)
+//         arrayFechas.push((listaPeliculas[i].release_date.slice(0,4)));
+        
+//     }
+// }
+ 
+
 
 // funcion que al apretar el boton de comenzar a jugar, se oculte la pantalla princial y salga la primera pregunta.
 function empezar() {
@@ -111,6 +145,9 @@ function pantallaFinal() {
 
     const pantallaFinal = document.querySelector(".pantalla_final");
     pantallaFinal.style.display = "block";
+
+    let results = document.querySelector("#numCorrectas");
+    results.innerHTML = `${aciertos}/10`
 
     const todasLasPantallasPreguntas = document.querySelectorAll(
         ".pantalla_preguntas"
