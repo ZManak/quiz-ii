@@ -5,52 +5,14 @@ async function getQuestions() {
     return rawData
 }
 
-//Pintar preguntas
-
-function printQuestions(rawData) {
-    const lienzo = document.getElementById("lienzo");
-    console.log(rawData.results[0].question)
-    console.log(rawData.results)
-    console.log(rawData);
-    const arrQuest = (({ results }) => ({ results }))(rawData);
-    console.log(arrQuest)
-    const comp = [];
-    comp.push(...arrQuest.results);
-    console.log(comp);
-    return comp;
-
-}
-    /*for (let i = 0; i < rawData.results.lenght; i++) {
-        let tarjeta = document.createElement("div");
-
-        tarjeta.innerHTML =
-            `   <legend>${rawData.results[0].question}</legend>´
-        <div>
-        <input id=${lasPreguntas[i].respuestas[0]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[0]}>
-        <label for=${lasPreguntas[i].respuestas[0]}>${lasPreguntas[i].respuestas[0]}</label>
-        </div>
-        <div>
-        <input id=${lasPreguntas[i].respuestas[1]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[1]}>
-        <label for=${sPreguntas[i].respuestas[1]}>${lasPreguntas[i].respuestas[1]}</label>
-        </div>
-        <div>
-        <input id=${lasPreguntas[i].respuestas[2]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[2]}>
-        <label for=${lasPreguntas[i].respuestas[2]}>${lasPreguntas[i].respuestas[2]}</label>
-        </div>
-        <div>
-        <input id=${lasPreguntas[i].respuestas[3]} type="radio" name=pregunta` + [i] + ` value=${lasPreguntas[i].respuestas[3]}>
-        <label for=${lasPreguntas[i].respuestas[3]}>${lasPreguntas[i].respuestas[3]}</label>
-        </div>
-        </fieldset >`
-
-
-        lienzo.appendChild(tarjeta);
-        //return tarjeta*/
-
-
-
-getQuestions()
-    .then(rawdata => {
-        printQuestions(rawdata)
-    })
-    .catch(error => alert("Error en el fetch" + error));
+//Randomizar preguntas
+function randomizar(array) {
+    let copia = Array.from(array); // Create a copy of input array
+    return function()  {
+        if (copia.length < 1) { copia = Array.from(array); } 
+        const index = Math.floor(Math.random() * copia.length); // Select an index randomly
+        const item = copia[index]; // Get the index value
+        copia.splice(index, 1); // Remove selected element from copied array
+        return item; // Return selected element
+      };
+  }
