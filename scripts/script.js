@@ -100,24 +100,6 @@ function validar(data) {
     }
     return aciertos
 }
-// const arrayPelis = [];
-// const arrayFechas =[];
-// async function starWars() {
-
-//     const resultado = await fetch(`https://swapi.dev/api/films/`);
-//     const baseDatos = await resultado.json();
-//     let listaPeliculas = baseDatos.results;
-
-//     for (let i = 0; i < listaPeliculas.length; i++) {
-
-//         arrayPelis.push(listaPeliculas[i].title)
-//         arrayFechas.push((listaPeliculas[i].release_date.slice(0,4)));
-        
-//     }
-// }
- 
-
-
 // funcion que al apretar el boton de comenzar a jugar, se oculte la pantalla princial y salga la primera pregunta.
 function empezar() {
     const primeraPregunta = document.querySelector(".pregunta0");
@@ -174,34 +156,6 @@ function rotar() {
         mostrarPregunta(++contador);
     };
 }
-
-
-// //Validación de formulario
-// function validar() {
-
-//     let aciertos = 0;
-
-//     let checkTodas = document.querySelectorAll("input:checked")
-
-//     if (checkTodas.length !== 10) {
-//         alert("Responde a todas las preguntas");
-//     } else {
-
-//         for (let i = 0; i < lasPreguntas.length; i++) {
-//             let userAnswer = document.querySelector("input[name=pregunta" + i + "]:checked").value;
-
-//             if (userAnswer === lasPreguntas[i].correcta) {
-//                 let label = document.getElementById("" + i)
-//                 label.style.backgroundColor = "green";
-//             } else {
-//                 let label = document.getElementById("" + i)
-//                 label.style.backgroundColor = "red";
-//             }
-
-//         }
-//     }
-// }
-
 
 var data = {
     // A labels array that can contain any sort of values
