@@ -1,6 +1,9 @@
 const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
 let aciertos = 0
+let contador = 0;
+
 //Fetch preguntas
+
 async function getQuestions() {
     let resp = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
     let rawData = await resp.json();
@@ -57,10 +60,11 @@ function printQuestions(rawData, lienzo) {
 
         lienzo.appendChild(tarjeta);
     }
-
+return comp
 }
+
 // recorremos los botones de la pagina.
-function activarBotones() {
+function activarBotones(rawData) {
     const botones = [];
     for (let i = 0; i <= 9; i++) {
         let boton = document.querySelector(".btnPreguntas" + i);
@@ -69,21 +73,25 @@ function activarBotones() {
     botones.forEach((element) => element.addEventListener("click", rotar));
     // añadimos evento de al clickar el boton comenzar a jugar haga la funcion empezar.
     document.getElementById("botonEmpezar").addEventListener("click", empezar);
+    return rawData
 }
 
 const elegidas = []
 const correctas = []
-async function iniciarQuiz() {
-    const questions = await getQuestions()
+function iniciarQuiz() {
+    const questions = getQuestions()
     printQuestions(questions, lienzo)
     activarBotones()
-    document.querySelector("").addEventListener("click", validar)
+    if (contador === 10) {
+        pantallaFinal(questions)
+    }
+    
     }
 
 iniciarQuiz()
 //LOGICA DE HTML IMPRIMIR UNA PREGUNTA POR PAGINA
 
-let contador = 0;
+
 function validar(data) {
     let aciertos = 0;
     const arrQuest2 = (({ results }) => ({ results }))(data);
@@ -100,21 +108,7 @@ function validar(data) {
     }
     return aciertos
 }
-// const arrayPelis = [];
-// const arrayFechas =[];
-// async function starWars() {
 
-//     const resultado = await fetch(`https://swapi.dev/api/films/`);
-//     const baseDatos = await resultado.json();
-//     let listaPeliculas = baseDatos.results;
-
-//     for (let i = 0; i < listaPeliculas.length; i++) {
-
-//         arrayPelis.push(listaPeliculas[i].title)
-//         arrayFechas.push((listaPeliculas[i].release_date.slice(0,4)));
-        
-//     }
-// }
  
 
 
