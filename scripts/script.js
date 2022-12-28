@@ -1,6 +1,9 @@
 const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
 let aciertos = 0
+let contador = 0;
+
 //Fetch preguntas
+
 async function getQuestions() {
     let resp = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
     let rawData = await resp.json();
@@ -57,10 +60,11 @@ function printQuestions(rawData, lienzo) {
 
         lienzo.appendChild(tarjeta);
     }
-
+return comp
 }
+
 // recorremos los botones de la pagina.
-function activarBotones() {
+function activarBotones(rawData) {
     const botones = [];
     for (let i = 0; i <= 9; i++) {
         let boton = document.querySelector(".btnPreguntas" + i);
@@ -69,21 +73,25 @@ function activarBotones() {
     botones.forEach((element) => element.addEventListener("click", rotar));
     // añadimos evento de al clickar el boton comenzar a jugar haga la funcion empezar.
     document.getElementById("botonEmpezar").addEventListener("click", empezar);
+    return rawData
 }
 
 const elegidas = []
 const correctas = []
-async function iniciarQuiz() {
-    const questions = await getQuestions()
+function iniciarQuiz() {
+    const questions = getQuestions()
     printQuestions(questions, lienzo)
     activarBotones()
-    document.querySelector("").addEventListener("click", validar)
+    if (contador === 10) {
+        pantallaFinal(questions)
+    }
+    
     }
 
 iniciarQuiz()
 //LOGICA DE HTML IMPRIMIR UNA PREGUNTA POR PAGINA
 
-let contador = 0;
+
 function validar(data) {
     let aciertos = 0;
     const arrQuest2 = (({ results }) => ({ results }))(data);
@@ -100,88 +108,3 @@ function validar(data) {
     }
     return aciertos
 }
-// funcion que al apretar el boton de comenzar a jugar, se oculte la pantalla princial y salga la primera pregunta.
-function empezar() {
-    const primeraPregunta = document.querySelector(".pregunta0");
-    primeraPregunta.style.display = "block";
-
-    const pantallaInicial = document.querySelector(".pantalla_inicial");
-    pantallaInicial.style.display = "none";
-}
-
-// funcion que muestra la pregunta
-function mostrarPregunta(contador) {
-    const pregunta = document.querySelector(".pregunta" + contador);
-    pregunta.style.display = "block";
-    contador++;
-}
-
-//funcion que oculta la pregunta
-function ocultarPregunta(numPregunta) {
-    const pregunta = document.getElementById("pregunta" + numPregunta);
-    pregunta.style.display = "none";
-}
-
-//funcion que imprime la pantalla final
-function pantallaFinal() {
-    const ultimaPregunta = document.querySelector(".pregunta9");
-    ultimaPregunta.style.display = "none";
-
-    const pantallaFinal = document.querySelector(".pantalla_final");
-    pantallaFinal.style.display = "block";
-
-    let results = document.querySelector("#numCorrectas");
-    results.innerHTML = `${aciertos}/10`
-
-    const todasLasPantallasPreguntas = document.querySelectorAll(
-        ".pantalla_preguntas"
-    );
-    todasLasPantallasPreguntas.forEach(
-        (pantalla) => (pantalla.style.display = "none")
-    );
-}
-
-
-
-
-
-
-// funcion de cambiar de pregunta. al clickar siguiente pregunta, desaparece la pregunta actual y aparece la siguiente pregunta.
-
-function rotar() {
-    if (contador === 9) {// cambiar a longitud del botones 10.) {
-        pantallaFinal();
-    } else {
-        ocultarPregunta(contador);
-        mostrarPregunta(++contador);
-    };
-}
-
-var data = {
-    // A labels array that can contain any sort of values
-    labels: ['fechas', 'fechas', 'fechas', 'fechas', 'fechas'],
-    // Our series array that contains series objects or in this case series data arrays
-    series: [
-      [10, 2, 4, 4, ]
-    ]
-  };
-  var options = {
-    onlyInteger: true,
-    low:0,
-    axisX: {
-      offset:200
-    },
-    axisY: {
-      onlyInteger: true,
-      offset: 80,
-      labelInterpolationFnc: function (value) {
-        return '' + value + '';
-      }
-    }
-  };
-  
-  // Create a new line chart object where as first parameter we pass in a selector
-  // that is resolving to our chart container element. The Second parameter
-  // is the actual data object.
-  new Chartist.Bar('.ct-chart', data, options);
-
