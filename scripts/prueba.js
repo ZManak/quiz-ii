@@ -14,6 +14,16 @@
 //     }
 // }
 
+//   for (let i = 0; i <= localStorage.length; i++) {
+//     let key = localStorage.key(i);
+//     if (key === 'memoryCard') {
+//       break;
+//     } else {
+//       const arrayPuntuaciones = []
+//       localStorage.setItem("memoryCard", JSON.stringify(arrayPuntuaciones));
+//     }
+//   }
+
 const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
 
 const arrayPreguntas = [];
@@ -21,8 +31,7 @@ const arrayRespuestas = [];
 let contador = 0
 let aciertos = 0
 let fecha = new Date().toLocaleDateString()
-const puntuaciones = []
-
+const totalScore = []
 
 async function sacarPreguntas() {
     let resp = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
@@ -119,7 +128,7 @@ function pantallaFinal() {
     let respuestas = document.querySelectorAll('input:checked')
     if (respuestas.length !== arrayPreguntas.length) {
         alert("No se respondieron todas.")
-        document.location.reload(true)
+        location.reload(true)
     }
     for (let i = 0; i < arrayPreguntas.length; i++) {
         let chosen = respuestas[i].value
@@ -145,10 +154,7 @@ function pantallaFinal() {
 }
 
 function validar() {
-    if (arrayRespuestas.length !== arrayPreguntas.length) {
-        alert("No se respondieron todas")
-        pantallaFinal()
-    }
+   
     for (let i = 0; i < arrayPreguntas.length; i++){
         if (arrayRespuestas[i] === arrayPreguntas[i].correct_answer.split(' ').join('')){
             aciertos++
@@ -177,30 +183,41 @@ async function startQuiz() {
 }
 
 function saveScore() {
-    let score = {
-        puntuacion: aciertos,
-        fecha: fecha
-    }
-
-    let nuevaScore = JSON.parse(localStorage.getItem("puntuacion"))
-
-    nuevaScore.push(score)
-
-    localStorage.setItem("puntuacion", JSON.stringify(nuevaScore))
-     
+    
+        // Parse any JSON previously stored in allEntries
+        let existingEntries = JSON.parse(localStorage.getItem("puntuaciones"));
+        if(existingEntries == null) existingEntries = [];
+        let score = {
+            "puntuacion": aciertos,
+            "fecha": fecha
+        };
+        localStorage.setItem("score", JSON.stringify(score));
+        // Save allEntries back to local storage
+        existingEntries.push(score);
+        localStorage.setItem("puntuaciones", JSON.stringify(existingEntries));
+    
 }
 
 startQuiz()
 
+let arrayX = []
+let arrayY = []
+let existingEntries = JSON.parse(localStorage.getItem("puntuaciones"));
+for (let i = 0; i < existingEntries.length; i++) {
+    arrayY.push(existingEntries[i].puntuacion);
+    arrayX.push(existingEntries[i].fecha);
+}
 var data = {
     // A labels array that can contain any sort of values
-    labels: ['fechas', 'fechas', 'fechas', 'fechas', 'fechas'],
+    
+    labels: arrayX,
     // Our series array that contains series objects or in this case series data arrays
     series: [
-      [10, 2, 4, 4, ]
+      arrayY
     ]
   };
   var options = {
+    height: 500,
     onlyInteger: true,
     low:0,
     axisX: {
@@ -219,3 +236,4 @@ var data = {
   // that is resolving to our chart container element. The Second parameter
   // is the actual data object.
   new Chartist.Bar('.ct-chart', data, options);
+
