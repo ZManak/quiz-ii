@@ -20,6 +20,9 @@ const arrayPreguntas = [];
 const arrayRespuestas = [];
 let contador = 0
 let aciertos = 0
+let fecha = new Date().toLocaleDateString()
+const puntuaciones = []
+
 
 async function sacarPreguntas() {
     let resp = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
@@ -114,13 +117,18 @@ function ocultarPregunta(contador) {
 
 function pantallaFinal() {
     let respuestas = document.querySelectorAll('input:checked')
-    
+    if (respuestas.length !== arrayPreguntas.length) {
+        alert("No se respondieron todas.")
+        document.location.reload(true)
+    }
     for (let i = 0; i < arrayPreguntas.length; i++) {
         let chosen = respuestas[i].value
         arrayRespuestas.push(chosen)  
        }
     
-    validar()
+    validar();
+
+    saveScore();
 
     const pantallaFinal = document.querySelector(".pantalla_final");
     pantallaFinal.style.display = "block";
@@ -168,6 +176,19 @@ async function startQuiz() {
     activarBotones();
 }
 
+function saveScore() {
+    let score = {
+        puntuacion: aciertos,
+        fecha: fecha
+    }
+
+    let nuevaScore = JSON.parse(localStorage.getItem("puntuacion"))
+
+    nuevaScore.push(score)
+
+    localStorage.setItem("puntuacion", JSON.stringify(nuevaScore))
+     
+}
 
 startQuiz()
 
