@@ -210,10 +210,10 @@ for (let i = 0; i < existingEntries.length; i++) {
 var data = {
     // A labels array that can contain any sort of values
     
-    labels: arrayX,
+    labels: arrayX.slice(-4),
     // Our series array that contains series objects or in this case series data arrays
     series: [
-      arrayY
+      arrayY.slice(-4)
     ]
   };
   var options = {
