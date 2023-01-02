@@ -5,6 +5,10 @@
     font-family: 'Mochiy Pop One';
 }
 
+body {
+    background-color: rgb(53, 255, 161);
+}
+
 /*TITULO QUIZ*/
 h1{
     width: fit-content;
@@ -34,20 +38,11 @@ legend {
 
 /*cada respuesta esta en un label*/
 label {
-    margin: 10px;
+    margin: 3px;
     padding: 10px;
-
 }
 
-body {
-    background-color: rgb(53, 255, 161);
-}
 
-.btnPreguntas0boton {
-    display: flex;
-    justify-content: center;
-    
-}
 
 /* ID,S DE LAS RESPUESTAS DE CADA PREGUNTA.*/
 #r00, #r10, #r20, #r30, #r40, #r50, #r60, #r70, #r80, #r90{
@@ -78,10 +73,19 @@ body {
     border-radius: 15px;
 }
 
+/*Div para boton de siguiente pregunta*/
 
 div {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+}
+
+/* Contenedor boton siguiente pregunta*/
+article {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 
@@ -98,7 +102,9 @@ div {
 }
 
 .boton, .btn{
-    border: none;
+    border: 2px solid white;
+    width: 30%;
+    height: 40%;
     background: rgb(162, 210, 255);
     color: #fff;
     padding: 10px 20px;
@@ -112,13 +118,13 @@ div {
     transform: scale(1.1);
 }
 
+/* GRAFICA*/
+
 .chart-container {
     padding: 100px;
-    width: 100%; /* Establece el ancho del contenedor en el 80% del ancho del padre */
-    margin: 0 auto; /* Centra el contenedor en el padre */
+    width: 100%; 
+    margin: 0 auto;
   }
-
-
 
 /*MEDIA QUERYS DARLE UNA VUELTA QUE MODIFICAR EN CASO DE CAMBIAR EL DISPOSITIVO*/
 
@@ -130,15 +136,15 @@ div {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .ct-chart {
-    width: 50%; /* Establece el ancho de la gráfica en el 50% del ancho del contenedor en tablets */
-    height: 75vh; /* Establece la altura de la gráfica en el 75% del alto de la pantalla en tablets */
+    width: 50%; 
+    height: 75vh; 
   }
 }
 
 @media (min-width: 992px) {
   .ct-chart {
-    width: 25%; /* Establece el ancho de la gráfica en el 25% del ancho del contenedor en ordenadores */
-    height: 100vh; /* Establece la altura de la gráfica en el 100% del alto de la pantalla en ordenadores */
+    width: 25%; 
+    height: 100vh; 
   }
 }
 

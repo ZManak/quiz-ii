@@ -55,7 +55,7 @@ function printQuestions(arrayPreguntas, lienzo) {
 
         tarjeta.innerHTML =
             `<fieldset>
-        <legend id=${i}>${arrayPreguntas[i].question}</legend>
+        <legend id=${i}>${i+1} - ${arrayPreguntas[i].question}</legend>
         <div>
         <input class="pregunta" id="a${i}" type="radio" name=pregunta${i}" value=${q1.split(' ').join('')}>
         <label id=r${i}0 for="a${i}">${q1}</label>
@@ -73,7 +73,7 @@ function printQuestions(arrayPreguntas, lienzo) {
         <label id=r${i}3 for="d${i}">${q4}</label>
         </div>
         </fieldset >
-        <button class="btnPreguntas${i} boton">SIGUIENTE PREGUNTA</button>`
+        <article><button class="btnPreguntas${i} boton">SIGUIENTE PREGUNTA</button></article>`
 
         lienzo.appendChild(tarjeta);
     }
@@ -83,7 +83,6 @@ function activarBotones() {
     const botones = [];
     for (let i = 0; i <= 9; i++) {
         let boton = document.querySelector(`.btnPreguntas${i}`);
-        console.log(boton)
         botones.push(boton);
 
     }
@@ -102,7 +101,6 @@ function empezar() {
 }
 
 function rotar() {
-    
     if (contador === 9) {
         pantallaFinal();
     } else {
@@ -154,7 +152,6 @@ function pantallaFinal() {
 }
 
 function validar() {
-   
     for (let i = 0; i < arrayPreguntas.length; i++){
         if (arrayRespuestas[i] === arrayPreguntas[i].correct_answer.split(' ').join('')){
             aciertos++
@@ -173,17 +170,15 @@ function randomizar(array) {
     };
 }
 
-
-
-
 async function startQuiz() {
     await sacarPreguntas();
     printQuestions(arrayPreguntas, lienzo)
     activarBotones();
 }
 
+
+// local storage
 function saveScore() {
-    
         // Parse any JSON previously stored in allEntries
         let existingEntries = JSON.parse(localStorage.getItem("puntuaciones"));
         if(existingEntries == null) existingEntries = [];
@@ -195,7 +190,6 @@ function saveScore() {
         // Save allEntries back to local storage
         existingEntries.push(score);
         localStorage.setItem("puntuaciones", JSON.stringify(existingEntries));
-    
 }
 
 startQuiz()
@@ -207,17 +201,17 @@ for (let i = 0; i < existingEntries.length; i++) {
     arrayY.push(existingEntries[i].puntuacion);
     arrayX.push(existingEntries[i].fecha);
 }
+
+// grafica
+
 var data = {
-    // A labels array that can contain any sort of values
-    
     labels: arrayX.slice(-4),
-    // Our series array that contains series objects or in this case series data arrays
     series: [
       arrayY.slice(-4)
     ]
   };
   var options = {
-    height: 500,
+    height: 400,
     onlyInteger: true,
     low:0,
     axisX: {
@@ -232,8 +226,34 @@ var data = {
     }
   };
   
-  // Create a new line chart object where as first parameter we pass in a selector
-  // that is resolving to our chart container element. The Second parameter
-  // is the actual data object.
   new Chartist.Bar('.ct-chart', data, options);
 
+
+// // firebase
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCUPSesheF8EV7NeggxQd7d1j1iTr_sE5M",
+//   authDomain: "puntuacion-quiz.firebaseapp.com",
+//   projectId: "puntuacion-quiz",
+//   storageBucket: "puntuacion-quiz.appspot.com",
+//   messagingSenderId: "227954742730",
+//   appId: "1:227954742730:web:28455a853301dcde8e2b33"
+// };
+
+// firebase.initializeApp(firebaseConfig);// Inicializar app Firebase
+
+// const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+
+// const guardarPuntucion = (user) => {
+//     db.collection("Resultados")
+//       .add(user)
+//       .then((docRef) => {
+//         console.log("Document written with ID: ", docRef.id)
+//         readAll()})
+//       .catch((error) => console.error("Error adding: ", error));
+//   };
+
+//   document.getElementById("btnFinal").addEventListener("click", () => {
+//     guardarPuntucion({
+//       resultado,
+//     });
+//   });
