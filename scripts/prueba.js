@@ -179,7 +179,6 @@ async function startQuiz() {
 
 // local storage
 function saveScore() {
-    
         // Parse any JSON previously stored in allEntries
         let existingEntries = JSON.parse(localStorage.getItem("puntuaciones"));
         if(existingEntries == null) existingEntries = [];
@@ -229,3 +228,32 @@ var data = {
   
   new Chartist.Bar('.ct-chart', data, options);
 
+
+// // firebase
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCUPSesheF8EV7NeggxQd7d1j1iTr_sE5M",
+//   authDomain: "puntuacion-quiz.firebaseapp.com",
+//   projectId: "puntuacion-quiz",
+//   storageBucket: "puntuacion-quiz.appspot.com",
+//   messagingSenderId: "227954742730",
+//   appId: "1:227954742730:web:28455a853301dcde8e2b33"
+// };
+
+// firebase.initializeApp(firebaseConfig);// Inicializar app Firebase
+
+// const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+
+// const guardarPuntucion = (user) => {
+//     db.collection("Resultados")
+//       .add(user)
+//       .then((docRef) => {
+//         console.log("Document written with ID: ", docRef.id)
+//         readAll()})
+//       .catch((error) => console.error("Error adding: ", error));
+//   };
+
+//   document.getElementById("btnFinal").addEventListener("click", () => {
+//     guardarPuntucion({
+//       resultado,
+//     });
+//   });
