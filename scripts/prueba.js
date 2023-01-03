@@ -1,28 +1,44 @@
-// const arrayPelis = [];
-// const arrayFechas =[];
-// async function starWars() {
+//firebase
 
-//     const resultado = await fetch(`https://swapi.dev/api/films/`);
-//     const baseDatos = await resultado.json();
-//     let listaPeliculas = baseDatos.results;
+const firebaseConfig = {
+    apiKey: "AIzaSyBOsTuYeIMk21TURaxYK_fwOTUUaxOCRUU",
+    authDomain: "puntuacion-quiz-ii.firebaseapp.com",
+    projectId: "puntuacion-quiz-ii",
+    storageBucket: "puntuacion-quiz-ii.appspot.com",
+    messagingSenderId: "785165930933",
+    appId: "1:785165930933:web:18fb6768a127c598f809fc"
+  };
 
-//     for (let i = 0; i < listaPeliculas.length; i++) {
 
-//         arrayPelis.push(listaPeliculas[i].title)
-//         arrayFechas.push((listaPeliculas[i].release_date.slice(0,4)));
-        
-//     }
-// }
+firebase.initializeApp(firebaseConfig);// Inicializar app Firebase
 
-//   for (let i = 0; i <= localStorage.length; i++) {
-//     let key = localStorage.key(i);
-//     if (key === 'memoryCard') {
-//       break;
-//     } else {
-//       const arrayPuntuaciones = []
-//       localStorage.setItem("memoryCard", JSON.stringify(arrayPuntuaciones));
-//     }
-//   }
+const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+  
+const savePuntuacion = (puntuacion2) => {
+    db.collection("puntuacion").add({
+        puntuacion2
+    })
+        .then(function(docRef) {
+            console.log("puntuacion añadida con la ID: " , docRef.id);
+    })
+        .catch (function(error) {
+            console.error("Error añadiendo puntuacion", error);
+        }) 
+    }
+
+// saco en variables globales las puntuaciones
+const puntuacion2 = JSON.parse(localStorage.getItem("score"));
+const aciertos1 = puntuacion2.puntuacion;
+console.log(aciertos1);
+const fechaAciertos = puntuacion2.fecha;
+console.log(fechaAciertos);
+
+const btnFinal = document.getElementById("btnFinal")
+btnFinal.addEventListener("click",savePuntuacion(puntuacion2))
+
+
+
+// pintar preguntas
 
 const lienzo = document.getElementsByClassName("pantalla_preguntas")[0]
 
@@ -176,7 +192,6 @@ async function startQuiz() {
     activarBotones();
 }
 
-
 // local storage
 function saveScore() {
         // Parse any JSON previously stored in allEntries
@@ -192,6 +207,7 @@ function saveScore() {
         localStorage.setItem("puntuaciones", JSON.stringify(existingEntries));
 }
 
+
 startQuiz()
 
 let arrayX = []
@@ -201,6 +217,9 @@ for (let i = 0; i < existingEntries.length; i++) {
     arrayY.push(existingEntries[i].puntuacion);
     arrayX.push(existingEntries[i].fecha);
 }
+
+
+
 
 // grafica
 
@@ -227,33 +246,3 @@ var data = {
   };
   
   new Chartist.Bar('.ct-chart', data, options);
-
-
-// // firebase
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCUPSesheF8EV7NeggxQd7d1j1iTr_sE5M",
-//   authDomain: "puntuacion-quiz.firebaseapp.com",
-//   projectId: "puntuacion-quiz",
-//   storageBucket: "puntuacion-quiz.appspot.com",
-//   messagingSenderId: "227954742730",
-//   appId: "1:227954742730:web:28455a853301dcde8e2b33"
-// };
-
-// firebase.initializeApp(firebaseConfig);// Inicializar app Firebase
-
-// const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
-
-// const guardarPuntucion = (user) => {
-//     db.collection("Resultados")
-//       .add(user)
-//       .then((docRef) => {
-//         console.log("Document written with ID: ", docRef.id)
-//         readAll()})
-//       .catch((error) => console.error("Error adding: ", error));
-//   };
-
-//   document.getElementById("btnFinal").addEventListener("click", () => {
-//     guardarPuntucion({
-//       resultado,
-//     });
-//   });
